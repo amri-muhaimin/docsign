@@ -1,0 +1,284 @@
+:root{
+  --bg0:#070A12;
+  --bg1:#0B1020;
+  --panel: rgba(16, 22, 41, .78);
+  --panel2: rgba(12, 16, 32, .72);
+  --line: rgba(255,255,255,.10);
+
+  --text:#EAF0FF;
+  --muted:#AAB6D6;
+
+  --brand:#5B8CFF;
+  --brand2:#3A66FF;
+
+  --ok:#48E6A6;
+  --warn:#FFD166;
+  --err:#FF5C7A;
+
+  --radius:18px;
+  --radius2:14px;
+  --shadow: 0 18px 55px rgba(0,0,0,.45);
+  --shadow2: 0 10px 26px rgba(0,0,0,.35);
+
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 700px at 10% 10%, rgba(91,140,255,.20), transparent 60%),
+    radial-gradient(900px 600px at 90% 20%, rgba(72,230,166,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+a{color:inherit; text-decoration:none}
+a:hover{text-decoration:underline}
+
+.wrap{
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 26px 20px 34px;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand .mark{
+  width:40px; height:40px;
+  border-radius: 14px;
+  display:grid; place-items:center;
+  font-weight: 800;
+  background: rgba(91,140,255,.16);
+  border: 1px solid rgba(91,140,255,.30);
+  box-shadow: 0 10px 26px rgba(58,102,255,.14);
+}
+.brand .title{
+  line-height:1.1;
+}
+.brand .title b{
+  display:block;
+  font-size: 16px;
+  letter-spacing: .2px;
+}
+.brand .title span{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+h1{font-size: 30px; margin: 0 0 10px;}
+h2{font-size: 18px; margin: 0 0 10px;}
+p{margin:10px 0}
+.muted{color:var(--muted)}
+.small{font-size:.93rem}
+
+.card{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 16px;
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+code, .code{
+  font-family: var(--mono);
+  font-size: .95em;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+label{font-size:.92rem; color: var(--muted); display:block; margin-bottom:6px;}
+input[type="file"],
+input[type="text"],
+input[type="password"],
+select,
+textarea{
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(7,10,18,.55);
+  color: var(--text);
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+}
+textarea{resize: vertical}
+input:focus, select:focus, textarea:focus{
+  border-color: rgba(91,140,255,.55);
+  box-shadow: 0 0 0 4px rgba(91,140,255,.14);
+}
+
+.btn, button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 10px 14px;
+
+  background: linear-gradient(180deg, rgba(91,140,255,.95), rgba(58,102,255,.95));
+  color: white;
+  font-weight: 650;
+  cursor:pointer;
+
+  box-shadow: 0 14px 30px rgba(58,102,255,.22);
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btn:hover, button:hover{filter: brightness(1.03)}
+.btn:active, button:active{transform: translateY(1px)}
+.btn.secondary, button.secondary{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:none;
+}
+.btn.secondary:hover, button.secondary:hover{background: rgba(255,255,255,.09)}
+.btn:disabled, button:disabled{opacity:.55; cursor:not-allowed; box-shadow:none}
+
+.hr{height:1px; background: var(--line); margin: 14px 0; border:0}
+
+.alert{
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+}
+.alert.ok{border-color: rgba(72,230,166,.35)}
+.alert.err{border-color: rgba(255,92,122,.35)}
+.alert.warn{border-color: rgba(255,209,102,.35)}
+.alert b{display:block; margin-bottom:4px}
+
+.table{display:grid; gap: 10px; margin-top: 10px;}
+.thead,.trow{
+  display:grid;
+  grid-template-columns: 150px 1fr 120px 230px;
+  gap: 10px;
+  align-items:center;
+}
+.thead{
+  font-weight: 700;
+  color: rgba(234,240,255,.82);
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+}
+.trow{
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(0,0,0,.16);
+}
+
+/* Sign page */
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  align-items:center;
+  justify-content: space-between;
+
+  padding: 12px;
+  border-radius: var(--radius2);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+}
+.toolbar .left, .toolbar .right{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  align-items:center;
+}
+.inline{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  color: var(--muted);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(0,0,0,.18);
+}
+.inline input[type="range"]{width: 170px}
+
+.viewer{
+  margin-top: 12px;
+  position:relative;
+  overflow:auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(800px 400px at 50% 0%, rgba(255,255,255,.06), transparent 70%),
+    rgba(0,0,0,.22);
+  padding: 14px;
+  min-height: 520px;
+  box-shadow: var(--shadow);
+}
+#pdfCanvas{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: rgba(255,255,255,.02);
+}
+
+/* signature overlay */
+.sig{
+  position:absolute;
+  left:0; top:0;
+  width:220px;
+  opacity:.96;
+  cursor:move;
+  user-select:none;
+  touch-action:none;
+  transform: translate3d(120px, 140px, 0);
+  will-change: transform;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
+}
+.sig.active{
+  outline: 2px solid rgba(91,140,255,.95);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+@media (max-width: 860px){
+  .thead,.trow{grid-template-columns: 1fr}
+  .toolbar{gap: 12px}
+  .inline input[type="range"]{width: 140px}
+}
