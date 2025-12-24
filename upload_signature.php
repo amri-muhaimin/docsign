@@ -11,6 +11,36 @@ function fail(string $msg) {
     exit;
 }
 
+function make_background_transparent(string $source, string $dest): bool {
+    if (!function_exists('imagecreatefrompng')) return false;
+
+    $img = imagecreatefrompng($source);
+    if (!$img) return false;
+
+    imagealphablending($img, false);
+    imagesavealpha($img, true);
+
+    $w = imagesx($img);
+    $h = imagesy($img);
+
+    $bgColor = imagecolorat($img, 0, 0);
+    $bg = imagecolorsforindex($img, $bgColor);
+    $transparent = imagecolorallocatealpha($img, $bg['red'], $bg['green'], $bg['blue'], 127);
+
+    for ($y = 0; $y < $h; $y++) {
+        for ($x = 0; $x < $w; $x++) {
+            $rgba = imagecolorsforindex($img, imagecolorat($img, $x, $y));
+            if ($rgba['alpha'] === 0 && $rgba['red'] === $bg['red'] && $rgba['green'] === $bg['green'] && $rgba['blue'] === $bg['blue']) {
+                imagesetpixel($img, $x, $y, $transparent);
+            }
+        }
+    }
+
+    $saved = imagepng($img, $dest);
+    imagedestroy($img);
+    return $saved;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail('Metode tidak valid.');
 
 if (empty($_FILES['sig']) || $_FILES['sig']['error'] !== UPLOAD_ERR_OK) {
@@ -33,8 +63,10 @@ if ($head !== "\x89PNG\r\n\x1a\n") {
 }
 
 $dest = signature_path();
-if (!move_uploaded_file($tmp, $dest)) {
-    fail('Gagal menyimpan signature.');
+if (!make_background_transparent($tmp, $dest)) {
+    if (!move_uploaded_file($tmp, $dest)) {
+        fail('Gagal menyimpan signature.');
+    }
 }
 
 header('Location: admin.php');
