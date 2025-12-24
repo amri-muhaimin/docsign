@@ -44,6 +44,7 @@
   // placements store ratios
   let placements = [];
   let activeId = null;
+  let clipboardPlacement = null;
 
   function uid(){ return "s" + Math.random().toString(16).slice(2) + Date.now().toString(16); }
 
@@ -216,6 +217,27 @@
     createPlacement(a);
   });
   delSigBtn.addEventListener("click", () => removeActive());
+
+  document.addEventListener("keydown", (e) => {
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+    const isTyping = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+    if (isTyping) return;
+
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "c") {
+      const a = getActive();
+      if (!a) return;
+      clipboardPlacement = a;
+      setMsg("Tanda tangan disalin. Tekan Ctrl+V untuk menempel.");
+      e.preventDefault();
+    }
+
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "v") {
+      const source = clipboardPlacement || getActive();
+      createPlacement(source || null);
+      setMsg("Tanda tangan ditempel.");
+      e.preventDefault();
+    }
+  });
 
   sigScale.addEventListener("input", () => {
     const a = getActive();

@@ -67,7 +67,7 @@ if (!$rel || !is_file($abs)) {
           <button id="delSigBtn" class="secondary">Hapus</button>
 
           <div class="badge">Skala</div>
-          <input id="sigScale" type="range" min="50" max="200" value="100" />
+          <input id="sigScale" type="range" min="20" max="200" value="100" />
         </div>
 
         <button id="saveBtn">Simpan (ke OneDrive Signed)</button>
